@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>Contact</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+	<script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+	<script type="text/javascript" src="js/menu.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$(".myButton").click(function () {
+				var userName = $("input[name='userName']").val();
+				var userPhone = $("input[name='userPhone']").val();
+				var rating = $("#ratingSelect").val();
+				var userMsg = $("textarea[name='userMsg']").val();
+
+				// Send the data to the server-side script for storing
+				$.post("save_comment.php", {
+					userName: userName,
+					userPhone: userPhone,
+					rating: rating,
+					userMsg: userMsg
+				}, function (data) {
+					$(".displayData").html(data);
+				});
+			});
+
+			$(".displayButton").click(function () {
+				// Fetch the saved comments from the server-side script
+				$.get("get_comments.php", function (data) {
+					$(".displayData").html(data);
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<style>
+		select {
+			width: 100px;
+			height: 30px;
+		}
+	</style>
+	<!----start-header----->
+	<div class="header_img">
+		<img src="images/header_img.jpg" alt="" />
+		<div class="wrap">
+			<div class="header">
+				<div class="logo">
+					<a href="index.html"><img src="images/logo.png" alt=""></a>
+				</div>
+				<div class="menu">
+					<nav class="clearfix">
+						<ul class="clearfix">
+							<li><a href="index.html">HOME</a></li>
+							<li><a href="about.html">ABOUT</a></li>
+							<li><a href="services.html">SERVICES</a></li>
+							<li><a href="Price.html">PRICE LIST</a></li>
+							<li><a href="contact.html">CONTACT</a></li>
+							<li class="active"><a href="comment.html">COMMENT</a></li>
+						</ul>
+						<a href="#" id="pull">Menu</a>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!----End-header----->
+	<!---start-content---->
+
+	<div class="wrap">
+		<div class="content">
+			<div class="contact_desc">
+				<div class="contact-form">
+					<h2>Comment</h2>
+					<form method="post" action="#" class="left_form">
+						<div>
+							<span><label>USER ID</label></span>
+							<span><input name="userName" type="text" class="textbox"></span>
+						</div>
+						<div>
+							<span><label>PHONE NUMBER</label></span>
+							<span><input name="userPhone" type="text" class="textbox"></span>
+						</div>
+						<div
+
+>
+							<span><label>PLEASE RATE</label></span>
+							<select id="ratingSelect">
+								<option value="1">Please select</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+							</select>
+						</div>
+						<div>
+							<span><input type="button" value="Submit" class="myButton"></span>
+						</div>
+					</form>
+					<form class="right_form">
+						<div>
+							<span><label>COMMENT</label></span>
+							<span><textarea name="userMsg"> </textarea></span>
+						</div>
+					</form>
+					<div class="displayData"></div>
+				</div>
+				<button class="displayButton">显示保存的数据</button>
+				<div class="clear"></div>
+			</div>
+		</div>
+	</div>
+	<!---End-content---->
+	<!---start-footer---->
+	<div class="copy-right">
+		<p>Design by <a href="http://123.com/">202132110126 202132110124</a></p>
+	</div>
+	<!---End-footer---->
+	<div style="display:none">
+		<script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript'
+			charset='gb2312'></script>
+	</div>
+
+
+</body>
+
+</html>
